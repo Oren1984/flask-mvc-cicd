@@ -1,0 +1,52 @@
+# Virtual environment folders
+venv/
+env/
+.venv/
+
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+# Build and distribution folders
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+
+# Log files and test reports
+*.log
+htmlcov/
+.tox/
+.coverage
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+
+# Temporary database files
+*.sqlite3
+*.db
+
+
+# Environment and secret files
+.env
+.env.*
+
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+# Docker overrides
+docker-compose.override.yml
+docker-compose.override.yaml
