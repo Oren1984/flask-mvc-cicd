@@ -1,0 +1,8 @@
+mysql:
+  enabled: true
+  initdbScriptsConfigMap: mysql-init-script
+  auth:
+    rootPassword: my-secret-pw
+    database: flask_mvc_db
+    username: root
+    password: my-secret-pw

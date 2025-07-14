@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: oren1984/flask-mvc-mysql-app
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 5000
+  nodePort: 30080
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+mysql:
+  image: mysql:5.7
+  rootPassword: "mysql"  # We will override this with a separate secret file
+
+serviceAccount:
+  create: true
+  name: ""
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

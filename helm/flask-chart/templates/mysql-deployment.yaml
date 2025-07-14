@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flask-chart.fullname" . }}-mysql
+  labels:
+    app: {{ include "flask-chart.name" . }}-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "flask-chart.name" . }}-mysql
+  template:
+    metadata:
+      labels:
+        app: {{ include "flask-chart.name" . }}-mysql
+    spec:
+      containers:
+        - name: mysql
+          image: {{ .Values.mysql.image }}
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-password
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d/
+      volumes:
+        - name: mysql-data
+          emptyDir: {}
+        - name: initdb
+          configMap:
+            name: mysql-init-script

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "flask-chart.fullname" . }}-mysql
+  labels:
+    app: {{ include "flask-chart.name" . }}-mysql
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ include "flask-chart.name" . }}-mysql
+  ports:
+    - port: 3306
+      targetPort: 3306
