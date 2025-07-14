@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql  # Name of the MySQL deployment
+spec:
+  replicas: 1  # Run a single MySQL instance
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7  # Use MySQL 5.7 image
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret  # Reference the secret created earlier
+              key: mysql-root-password
+        ports:
+        - containerPort: 3306  # Default MySQL port
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql  # Mount for data persistence
+      volumes:
+      - name: mysql-data
+        emptyDir: {}  # In-memory volume (ephemeral)

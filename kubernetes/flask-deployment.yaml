@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app  # Name of the Flask app deployment
+spec:
+  replicas: 1  # Run a single Flask pod
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: oren1984/flask-mvc-mysql-app:latest  # Flask Docker image
+        ports:
+        - containerPort: 5000  # Port Flask listens on inside the container
+        env:
+        - name: DB_HOST
+          value: mysql  # Name of the MySQL service to connect to
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret  # Reference MySQL root password
+              key: mysql-root-password
+

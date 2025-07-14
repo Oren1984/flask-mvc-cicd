@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service  # Exposes the Flask app to the outside
+spec:
+  type: NodePort  # Make the service accessible via node IP and port
+  selector:
+    app: flask-app
+  ports:
+  - protocol: TCP
+    port: 80  # External port
+    targetPort: 5000  # Internal Flask app port
+    nodePort: 30080  # Custom node port for manual access (optional)

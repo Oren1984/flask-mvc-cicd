@@ -1,2 +1,11 @@
+# Ignore Python virtual environment
 venv/
+
+
+# Ignore environment variable definitions
 .env
+
+
+# Ignore Kubernetes secret files (keep private)
+kubernetes/mysql-secret.yaml
+agent.jar
