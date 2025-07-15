@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'oren-worker' }
 
     environment {
         // Docker image name for this app
@@ -7,7 +7,6 @@ pipeline {
     }
 
     stages {
-
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
