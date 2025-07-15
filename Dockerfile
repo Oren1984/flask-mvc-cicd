@@ -2,8 +2,8 @@
 FROM python:3.10-slim
 
 # Prevent Python from writing .pyc files and enable unbuffered output (logs immediately)
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set working directory inside container
 WORKDIR /app
