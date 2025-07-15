@@ -1,92 +1,101 @@
-# Flask MVC Basic Application
+# Flask MVC + MySQL CI/CD Project
 
-This is a basic Flask application implementing the MVC (Model-View-Controller) pattern. Currently, it demonstrates the Create operation from CRUD (Create, Read, Update, Delete) operations.
+This project demonstrates a full CI/CD pipeline for a Flask application using the MVC pattern, integrated with a MySQL database. The pipeline is implemented with Jenkins, Docker, Trivy, Helm, and Kubernetes.
 
-## Project Structure
+---
 
-```
-app/
-├── controllers/     # Contains the route handlers and business logic
-│   └── main.py     # Main controller with routes
-├── models/         # Contains database models
-│   └── user.py     # User model definition
-├── views/          # Contains the templates
-│   └── templates/  # HTML templates
-│       ├── base.html
-│       ├── index.html
-│       └── add_user.html
-└── __init__.py     # Application factory
-```
+## 🧱 Tech Stack
 
-## Features Implemented
+- **Flask MVC** – Basic CRUD (Create implemented)
+- **MySQL** – As backend database
+- **Jenkins** – CI/CD Pipeline
+- **Docker** – Containerization
+- **Trivy** – Security image scanning
+- **Helm** – Kubernetes deployment packaging
+- **Kubernetes** – Deployment and service orchestration
 
-1. **Create Operation**
-   - Add new users through a form
-   - Store user data in SQLite database
-   - Display success/error messages
+---
 
-## CRUD Operations Status
+## 🗂 Project Structure
 
-Currently, only the Create operation is implemented. The following operations need to be developed:
+flask-mvc-cicd/
+├── app/ # Flask MVC application
+├── Dockerfile # Build definition for the container
+├── docker-compose.yml # For local development
+├── helm/ # Helm chart for K8s deployment
+│ └── flask-chart/
+├── Jenkinsfile # Jenkins pipeline definition
+├── kubernetes/ # Kubernetes YAML files (optional legacy)
+├── requirements.txt # Python dependencies
+└── wait-for-it.sh # MySQL wait script
 
-1. **Create**: Implemented
-   - Add new users
-   - Form validation
-   - Database insertion
+---
 
-2. **Read**: To be implemented
-   
+## 🚀 Deployment Pipeline (Jenkins)
 
-3. **Update**: To be implemented
-   
+### Pipeline Stages:
 
-4. **Delete**: To be implemented
+1. **Checkout Git repository**  
+   https://github.com/Oren1984/flask-mvc-cicd.git
 
-## Setup Instructions
+2. **Build Docker image**  
+   `oren1984/flask-mvc-mysql-app`
 
-1. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   ```
+3. **Run Trivy security scan**  
+   High/Critical vulnerabilities scanned (errors ignored on timeout)
 
-2. Activate the virtual environment:
-   - Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - Unix/MacOS:
-     ```bash
-     source venv/bin/activate
-     ```
+4. **Push to Docker Hub**  
+   DockerHub Repo:  
+   `docker pull oren1984/flask-mvc-mysql-app`
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+5. **Deploy with Helm to Kubernetes**  
+   Release name: `flask-release`  
+   Values file: `helm/flask-chart/values.yaml`
 
-4. Run the application:
-   ```bash
-   python run.py
-   ```
+---
 
-## Learning Objectives
+## ✅ Jenkins Pipeline Output
 
-1. Understanding MVC pattern in Flask
-2. Working with SQLAlchemy for database operations
-3. Form handling and validation
-4. Template inheritance with Jinja2
-5. Flash messages for user feedback
+See full successful execution log in:  
+📄 [`jenkins-pipeline-log.txt`](jenkins-pipeline-log.txt)
 
-## Next Steps
+---
 
-To complete the CRUD application, you should implement:
+## 🌐 Accessing the Application
 
+After deployment, run:
 
-1. **Delete Operations**
-   - Add delete confirmation
-   - Implement soft or hard delete
-   - Handle related data cleanup
+```bash
+export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services flask-release-flask-chart)
+export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+echo http://$NODE_IP:$NODE_PORT
+🧪 Features Implemented
+ Flask MVC architecture
 
-## Contributing
+ Create operation (Add users)
 
-Feel free to implement the remaining CRUD operations and submit pull requests. This is a learning project, so any improvements or suggestions are welcome! 
+ SQLite/MySQL integration
+
+ CI/CD Pipeline
+
+ Docker build and push
+
+ Helm deploy to K8s
+
+ Trivy scan integration
+
+🛠 Next Improvements
+Implement Read/Update/Delete operations
+
+Integrate proper error handling
+
+Add monitoring & logging
+
+🔗 Related Links
+GitHub Repo: https://github.com/Oren1984/flask-mvc-cicd
+
+Docker Hub: https://hub.docker.com/r/oren1984/flask-mvc-mysql-app
+
+👨‍💻 Author
+Oren Salami – 2025
+Project submitted as part of Final Project CI/CD track (August)
