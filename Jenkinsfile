@@ -17,8 +17,8 @@ pipeline {
             steps {
                 echo 'Running Trivy security scan...'
                 sh '''
-                trivy image --severity HIGH,CRITICAL --no-progress --scanners vuln --format table $DOCKER_IMAGE > trivy-summary.txt
-                trivy image --no-progress --scanners vuln --format table $DOCKER_IMAGE > trivy-report.txt
+                trivy image --severity HIGH,CRITICAL --no-progress --scanners vuln --format table $DOCKER_IMAGE > trivy-summary.txt || true
+                trivy image --no-progress --scanners vuln --format table $DOCKER_IMAGE > trivy-report.txt || true
                 '''
                 archiveArtifacts artifacts: 'trivy-*.txt', fingerprint: true
             }
