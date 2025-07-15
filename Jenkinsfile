@@ -2,7 +2,6 @@ pipeline {
     agent { label 'oren-worker' }
 
     environment {
-        // Docker image name for this app
         DOCKER_IMAGE = 'oren1984/flask-mvc-mysql-app'
     }
 
@@ -18,9 +17,9 @@ pipeline {
             steps {
                 echo 'Running Trivy security scan...'
                 sh '''
-                trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress --format table $DOCKER_IMAGE > trivy-summary.txt
-                trivy image --no-progress --format table $DOCKER_IMAGE > trivy-report.txt
-                '''
+trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress --format table $DOCKER_IMAGE > trivy-summary.txt
+trivy image --no-progress --format table $DOCKER_IMAGE > trivy-report.txt
+'''
                 archiveArtifacts artifacts: 'trivy-*.txt', fingerprint: true
             }
         }
@@ -30,9 +29,9 @@ pipeline {
                 echo 'Pushing Docker image to Docker Hub...'
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker push $DOCKER_IMAGE
-                    '''
+echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+docker push $DOCKER_IMAGE
+'''
                 }
             }
         }
@@ -41,8 +40,8 @@ pipeline {
             steps {
                 echo 'Deploying to Kubernetes with Helm...'
                 sh '''
-                helm upgrade --install flask-release ./helm/flask-chart --values ./helm/flask-chart/values.yaml
-                '''
+helm upgrade --install flask-release ./helm/flask-chart --values ./helm/flask-chart/values.yaml
+'''
             }
         }
     }
