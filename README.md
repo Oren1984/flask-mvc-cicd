@@ -31,7 +31,7 @@ flask-mvc-cicd/
 
 ---
 
-## 🚀 Deployment Pipeline (Jenkins)
+##  Deployment Pipeline (Jenkins)
 
 ### Pipeline Stages:
 
