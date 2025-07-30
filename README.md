@@ -6,28 +6,33 @@ This project demonstrates a full CI/CD pipeline for a Flask application using th
 
 ## 🧱 Tech Stack
 
-- **Flask MVC** – Basic CRUD (Create implemented)
-- **MySQL** – As backend database
-- **Jenkins** – CI/CD Pipeline
-- **Docker** – Containerization
-- **Trivy** – Security image scanning
-- **Helm** – Kubernetes deployment packaging
-- **Kubernetes** – Deployment and service orchestration
+- [**Flask MVC**](https://flask.palletsprojects.com/) – Basic CRUD
+- [**MySQL**](https://www.mysql.com/) – As backend database
+- [**Jenkins**](https://www.jenkins.io/) – CI/CD Pipeline
+- [**Docker**](https://www.docker.com/) – Containerization
+- [**Trivy**](https://aquasecurity.github.io/trivy/) – Security image scanning
+- [**Helm**](https://helm.sh/) – Kubernetes deployment packaging
+- [**Kubernetes**](https://kubernetes.io/) – Deployment and service orchestration
 
 ---
 
 ## 🗂 Project Structure
 
+```text
 flask-mvc-cicd/
-├── app/ # Flask MVC application
-├── Dockerfile # Build definition for the container
-├── docker-compose.yml # For local development
-├── helm/ # Helm chart for K8s deployment
-│ └── flask-chart/
-├── Jenkinsfile # Jenkins pipeline definition
-├── kubernetes/ # Kubernetes YAML files (optional legacy)
-├── requirements.txt # Python dependencies
-└── wait-for-it.sh # MySQL wait script
+├── app/                      # Flask MVC application
+│   ├── models/               # Database models
+│   ├── templates/            # HTML templates
+│   └── static/               # Static files (CSS, JS)
+├── Dockerfile                # Build definition for the container
+├── docker-compose.yml        # For local development
+├── helm/                     # Helm chart for K8s deployment
+│   └── flask-chart/          # Helm chart details
+├── Jenkinsfile               # Jenkins pipeline definition
+├── kubernetes/               # Kubernetes YAML files (optional legacy)
+├── requirements.txt          # Python dependencies
+└── wait-for-it.sh            # MySQL wait script
+```
 
 ---
 
@@ -69,33 +74,31 @@ After deployment, run:
 export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services flask-release-flask-chart)
 export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
 echo http://$NODE_IP:$NODE_PORT
-🧪 Features Implemented
- Flask MVC architecture
+```
 
- Create operation (Add users)
+---
 
- SQLite/MySQL integration
+## 🧪 Features Implemented
 
- CI/CD Pipeline
+- Flask MVC architecture  
+- Full CRUD operations  
+- SQLite/MySQL integration  
+- CI/CD Pipeline  
+- Docker build and push  
+- Helm deploy to K8s  
+- Trivy scan integration
 
- Docker build and push
+---
 
- Helm deploy to K8s
+## 🔗 Related Links
 
- Trivy scan integration
+- GitHub Repo: https://github.com/Oren1984/flask-mvc-cicd  
+- Docker Hub: https://hub.docker.com/r/oren1984/flask-mvc-mysql-app
 
-🛠 Next Improvements
-Implement Read/Update/Delete operations
+---
 
-Integrate proper error handling
+## 👨‍💻 Author
 
-Add monitoring & logging
-
-🔗 Related Links
-GitHub Repo: https://github.com/Oren1984/flask-mvc-cicd
-
-Docker Hub: https://hub.docker.com/r/oren1984/flask-mvc-mysql-app
-
-👨‍💻 Author
-Oren Salami – 2025
+Oren Salami – 2025  
 Project submitted as part of Final Project CI/CD track (August)
+
