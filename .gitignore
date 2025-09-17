@@ -9,3 +9,6 @@ venv/
 # Ignore Kubernetes secret files (keep private)
 kubernetes/mysql-secret.yaml
 agent.jar
+
+# Ignore Python _pycache__
+_pycache__
