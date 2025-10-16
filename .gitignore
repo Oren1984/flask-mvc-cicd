@@ -1,14 +1,15 @@
 # Ignore Python virtual environment
 venv/
 
-
 # Ignore environment variable definitions
 .env
-
 
 # Ignore Kubernetes secret files (keep private)
 kubernetes/mysql-secret.yaml
 agent.jar
 
-# Ignore Python _pycache__
-_pycache__
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
