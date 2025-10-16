@@ -32,6 +32,7 @@ flask-mvc-cicd/
 ├── kubernetes/               # Kubernetes YAML files (optional legacy)
 ├── requirements.txt          # Python dependencies
 └── wait-for-it.sh            # MySQL wait script
+└── QA_Docs/ # QA documentation and Jenkins logs
 ```
 
 ---
@@ -87,6 +88,23 @@ echo http://$NODE_IP:$NODE_PORT
 - Docker build and push  
 - Helm deploy to K8s  
 - Trivy scan integration
+
+---
+
+🧾 Quality Assurance (QA)
+
+Comprehensive QA documentation is included under the QA_Docs/ folder.
+It provides validation for all pipeline stages, Trivy scan results, and deployment verification.
+
+Document	Description
+01_STP_Test_Plan.xlsx	Test plan covering CI/CD flow and environment setup
+02_STD_Test_Cases.xlsx	Step-by-step execution cases for build, scan, push, deploy
+03_STR_Test_Report.xlsx	Pipeline results and verification summary
+04_Bug_Report.xlsx	Documented Trivy timeout and scan findings
+Jenkins_Logs/	Original Jenkins logs for reference and traceability
+
+✅ All build and deployment stages completed successfully.
+⚠️ Trivy scan encountered a temporary timeout; re-scan recommended.
 
 ---
 
