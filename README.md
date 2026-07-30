@@ -50,7 +50,11 @@ flask-mvc-cicd/
 ├── requirements.txt     # Python dependencies
 ├── run.py               # Application entry point
 └── wait-for-it.sh       # Service readiness helper
-Local Deployment
+```
+
+---
+
+## Local Deployment
 
 Build and start the application with Docker Compose:
 
