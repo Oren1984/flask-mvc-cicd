@@ -1,52 +1,52 @@
-# Virtual environment folders
+# Git
+.git
+.gitignore
+.github/
+
+# Python virtual environments
 venv/
 env/
 .venv/
 
-
-# Python cache files
+# Python cache and compiled files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 
-
-# Build and distribution folders
+# Build and test artifacts
 build/
 dist/
 *.egg-info/
-.eggs/
-pip-wheel-metadata/
-
-
-# Log files and test reports
-*.log
+.pytest_cache/
+.coverage
+.coverage.*
 htmlcov/
 .tox/
-.coverage
-.pytest_cache/
-nosetests.xml
-coverage.xml
-*.cover
-
-
-# Temporary database files
-*.sqlite3
-*.db
-
+*.log
 
 # Environment and secret files
 .env
 .env.*
+kubernetes/mysql-secret.yaml
+agent.jar
 
+# QA documentation
+flask-mvc-cicd-QA_Docs/
+QA_Docs/
+**/QA_Docs/
+**/*-QA_Docs/
 
-# IDE and OS files
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE and operating-system files
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
 
-
-# Docker overrides
+# Local Docker Compose overrides
 docker-compose.override.yml
 docker-compose.override.yaml

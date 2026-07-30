@@ -1,83 +1,167 @@
 # Flask MVC CI/CD Project
 
-Full CI/CD pipeline for a Flask MVC application with MySQL, deployed to Kubernetes.
+A complete CI/CD implementation for a Flask MVC application backed by MySQL and deployed to Kubernetes.
+
+The project demonstrates an end-to-end DevOps workflow covering application containerization, automated vulnerability scanning, Docker image publishing, Kubernetes deployment, and Helm-based release management.
 
 ---
 
 ## Overview
 
-A complete DevOps project demonstrating build, scan, push, and deployment of a Flask MVC app using Jenkins, Docker, Trivy, Helm, and Kubernetes.
+This project contains a Flask application structured according to the MVC pattern, with CRUD functionality and a complete CI/CD pipeline.
+
+The pipeline performs the following stages:
+
+1. Retrieves the source code from GitHub
+2. Installs and validates application dependencies
+3. Builds the Docker image
+4. Scans the image for vulnerabilities with Trivy
+5. Pushes the approved image to Docker Hub
+6. Deploys the application to Kubernetes
+7. Manages the Kubernetes release through Helm
 
 ---
 
-## Tech Stack
+## Technology Stack
 
-- Flask (MVC)
+- Python
+- Flask
 - MySQL
 - Jenkins
 - Docker
+- Docker Compose
 - Trivy
 - Kubernetes
 - Helm
 
 ---
 
-## Quick Start
+## Project Structure
 
-Run locally with Docker Compose:
+```text
+flask-mvc-cicd/
+├── app/                 # Flask MVC application
+├── helm/                # Helm chart and deployment values
+├── kubernetes/          # Kubernetes manifests
+├── config.py            # Application configuration
+├── docker-compose.yml   # Local multi-container environment
+├── Dockerfile           # Application container definition
+├── Jenkinsfile          # CI/CD pipeline definition
+├── requirements.txt     # Python dependencies
+├── run.py               # Application entry point
+└── wait-for-it.sh       # Service readiness helper
+Local Deployment
 
-```bash
-docker compose up -d
+Build and start the application with Docker Compose:
 
-Deploy to Kubernetes with Helm:
+docker compose up --build -d
+
+Check the running containers:
+
+docker compose ps
+
+View application logs:
+
+docker compose logs -f
+
+Stop the local environment:
+
+docker compose down
+CI/CD Pipeline
+
+The Jenkins pipeline is defined in the Jenkinsfile.
+
+GitHub Push
+    ↓
+Jenkins Pipeline
+    ↓
+Dependency Validation
+    ↓
+Docker Image Build
+    ↓
+Trivy Vulnerability Scan
+    ↓
+Docker Hub Push
+    ↓
+Kubernetes Deployment
+    ↓
+Helm Release
+
+Jenkins and Docker Hub credentials must be configured in the Jenkins credentials store before running the complete pipeline.
+
+Kubernetes Deployment
+
+Validate the Kubernetes manifests:
+
+kubectl apply --dry-run=client -f kubernetes/
+
+Deploy the application:
+
+kubectl apply -f kubernetes/
+
+Check the deployed resources:
+
+kubectl get pods
+kubectl get deployments
+kubectl get services
+Helm Deployment
+
+Install the application:
 
 helm install flask-release ./helm/flask-chart
-```
 
----
+Upgrade an existing release:
 
-## Usage
+helm upgrade flask-release ./helm/flask-chart
 
-Pipeline flow:
+Check the release status:
 
-- Code pushed to GitHub
+helm list
+helm status flask-release
 
-- Jenkins pipeline runs automatically
+Remove the release:
 
-- Docker image is built
-
-- Trivy scans for vulnerabilities
-
-- Image is pushed to Docker Hub
-
-- App is deployed to Kubernetes via Helm
-
-Access the app:
-
-```bash
-kubectl get svc
-```
-
-Or via NodePort (if configured).
-
----
-
-## Cleanup
-
-```bash
 helm uninstall flask-release
-```
+Application Access
 
----
+Inspect the Kubernetes service:
 
-## Notes
+kubectl get svc
 
-- Includes full MVC structure with CRUD support
+Use the exposed service address or NodePort according to the active Kubernetes environment and service configuration.
 
-- QA documentation available under QA_Docs/
+Security Scanning
 
-- Built for learning CI/CD and Kubernetes workflows
+The CI/CD pipeline uses Trivy to scan the Docker image for known vulnerabilities before publishing and deployment.
 
-- Trivy scan may require re-run if timeout occurs
+A failed or interrupted scan should be investigated and rerun before continuing the pipeline.
 
----
+Cleanup
+
+Stop the Docker Compose environment:
+
+docker compose down
+
+Remove the Helm release:
+
+helm uninstall flask-release
+
+Remove resources deployed through Kubernetes manifests:
+
+kubectl delete -f kubernetes/
+Project Purpose
+
+This repository is a portfolio and learning project demonstrating:
+
+Flask MVC application architecture
+Containerized application delivery
+Jenkins pipeline automation
+Docker image vulnerability scanning
+Docker Hub image publishing
+Kubernetes workload deployment
+Helm-based release management
+Notes
+Includes a complete Flask MVC structure with CRUD functionality
+Built for practical CI/CD and Kubernetes workflow demonstration
+Kubernetes deployments can be managed through raw manifests or Helm
+Local databases, secrets, environment files, caches, and generated artifacts are excluded from version control

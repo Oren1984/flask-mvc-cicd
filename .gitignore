@@ -1,15 +1,57 @@
-## Ignore Python virtual environment
+# Python virtual environments
 venv/
+env/
+.venv/
 
-## Ignore environment variable definitions
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build and distribution artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Test and coverage artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment and secret files
 .env
+.env.*
+!.env.example
 
-## Ignore Kubernetes secret files (keep private)
+# Kubernetes secrets and local tools
 kubernetes/mysql-secret.yaml
 agent.jar
 
-## Ignore Python cache and compiled files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# QA documentation
+flask-mvc-cicd-QA_Docs/
+QA_Docs/
+**/QA_Docs/
+**/*-QA_Docs/
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local Docker Compose overrides
+docker-compose.override.yml
+docker-compose.override.yaml
