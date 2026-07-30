@@ -76,10 +76,13 @@ Stop the local environment:
 docker compose down
 ```
 
-CI/CD Pipeline
+---
+
+## CI/CD Pipeline
 
 The Jenkins pipeline is defined in the Jenkinsfile.
 
+```text
 GitHub Push
     ↓
 Jenkins Pipeline
@@ -95,10 +98,13 @@ Docker Hub Push
 Kubernetes Deployment
     ↓
 Helm Release
+```
 
 Jenkins and Docker Hub credentials must be configured in the Jenkins credentials store before running the complete pipeline.
 
-Kubernetes Deployment
+---
+
+## Kubernetes Deployment
 
 Validate the Kubernetes manifests:
 
@@ -155,13 +161,17 @@ kubectl get svc
 
 Use the exposed service address or NodePort according to the active Kubernetes environment and service configuration.
 
-Security Scanning
+---
+
+## Security Scanning
 
 The CI/CD pipeline uses Trivy to scan the Docker image for known vulnerabilities before publishing and deployment.
 
 A failed or interrupted scan should be investigated and rerun before continuing the pipeline.
 
-Cleanup
+---
+
+## Cleanup
 
 Stop the Docker Compose environment:
 
@@ -183,25 +193,26 @@ kubectl delete -f kubernetes
 
 ---
 
-Project Purpose
+## Project Purpose
 
 This repository is a portfolio and learning project demonstrating:
 
-Flask MVC application architecture
-Containerized application delivery
-Jenkins pipeline automation
-Docker image vulnerability scanning
-Docker Hub image publishing
-Kubernetes workload deployment
-Helm-based release management
+- Flask MVC application architecture
+- Containerized application delivery
+- Jenkins pipeline automation
+- Docker image vulnerability scanning
+- Docker Hub image publishing
+- Kubernetes workload deployment
+- Helm-based release management
 
 ---
 
-Notes
-Includes a complete Flask MVC structure with CRUD functionality- 
-Built for practical CI/CD and Kubernetes workflow demonstration- 
-Kubernetes deployments can be managed through raw manifests or Helm -
-Local databases, secrets, environment files, caches, and generated artifacts are excluded from version control -
+##Notes
+
+- Includes a complete Flask MVC structure with CRUD functionality 
+- Built for practical CI/CD and Kubernetes workflow demonstration 
+- Kubernetes deployments can be managed through raw manifests or Helm 
+- Local databases, secrets, environment files, caches, and generated artifacts are excluded from version control 
 
 ---
 
