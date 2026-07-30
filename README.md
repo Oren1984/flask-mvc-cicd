@@ -54,19 +54,28 @@ Local Deployment
 
 Build and start the application with Docker Compose:
 
+```bash
 docker compose up --build -d
+```
 
 Check the running containers:
 
+```bash
 docker compose ps
+```
 
 View application logs:
 
+```bash
 docker compose logs -f
+```
 
 Stop the local environment:
 
+```bash
 docker compose down
+```
+
 CI/CD Pipeline
 
 The Jenkins pipeline is defined in the Jenkinsfile.
@@ -93,40 +102,56 @@ Kubernetes Deployment
 
 Validate the Kubernetes manifests:
 
+```bash
 kubectl apply --dry-run=client -f kubernetes/
+```
 
 Deploy the application:
 
+```bash
 kubectl apply -f kubernetes/
+```
 
 Check the deployed resources:
 
+```bash
 kubectl get pods
 kubectl get deployments
 kubectl get services
 Helm Deployment
+```
 
 Install the application:
 
+```bash
 helm install flask-release ./helm/flask-chart
+```
 
 Upgrade an existing release:
 
+```bash
 helm upgrade flask-release ./helm/flask-chart
+```
 
 Check the release status:
 
+```bash
 helm list
 helm status flask-release
+```
 
 Remove the release:
 
+```bash
 helm uninstall flask-release
 Application Access
+```
 
 Inspect the Kubernetes service:
 
+```bash
 kubectl get svc
+```
 
 Use the exposed service address or NodePort according to the active Kubernetes environment and service configuration.
 
@@ -140,15 +165,24 @@ Cleanup
 
 Stop the Docker Compose environment:
 
+```bash
 docker compose down
+```
 
 Remove the Helm release:
 
+```bash
 helm uninstall flask-release
+```
 
-Remove resources deployed through Kubernetes manifests:
+Remove resources deployed through Kubernetes manifests
+:
+```bash
+kubectl delete -f kubernetes
+```
 
-kubectl delete -f kubernetes/
+---
+
 Project Purpose
 
 This repository is a portfolio and learning project demonstrating:
@@ -160,8 +194,14 @@ Docker image vulnerability scanning
 Docker Hub image publishing
 Kubernetes workload deployment
 Helm-based release management
+
+---
+
 Notes
-Includes a complete Flask MVC structure with CRUD functionality
-Built for practical CI/CD and Kubernetes workflow demonstration
-Kubernetes deployments can be managed through raw manifests or Helm
-Local databases, secrets, environment files, caches, and generated artifacts are excluded from version control
+Includes a complete Flask MVC structure with CRUD functionality- 
+Built for practical CI/CD and Kubernetes workflow demonstration- 
+Kubernetes deployments can be managed through raw manifests or Helm -
+Local databases, secrets, environment files, caches, and generated artifacts are excluded from version control -
+
+---
+
