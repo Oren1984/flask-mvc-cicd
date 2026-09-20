@@ -3,6 +3,14 @@
 .gitignore
 .github/
 
+# Not needed inside the application image
+kubernetes/
+helm/
+Jenkinsfile
+docs/
+README.md
+trivy-*.txt
+
 # Python virtual environments
 venv/
 env/
